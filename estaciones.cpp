@@ -1,6 +1,6 @@
 #include "estaciones.h"
 
-//implementacion de los metodos:
+//implementacion del constructro y de los metodos de la clase estaciones:
 Estaciones::Estaciones(string nombre, int siguiente, int anterior, bool transferencia)
 {
     nombreEstacion = nombre;
