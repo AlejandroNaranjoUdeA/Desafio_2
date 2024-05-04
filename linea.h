@@ -1,22 +1,21 @@
 #ifndef LINEA_H
 #define LINEA_H
 
+#include "estaciones.h"
 
 class Linea
 {
 private:
-    //ATRIBUTOS:
-    string nombreLinea;
-    estacion** estaciones; // puntero
+    std::string nombreLinea;
+    Estacion** estaciones;
     int cantidadEstaciones;
 public:
-    Linea(string nombre); //CONSTRUCTOR:
-    //METODOS:
+    Linea(std::string nombre);
     void agregarEstacion(Estacion* estacion);
-    void eliminarEstacion(string nombre);
+    void eliminarEstacion(std::string nombre);
     int obtenerCantidadEstaciones();
-    string getNombreLinea();
-    void setNombreLinea(string nombre);
+    std::string getNombreLinea();
+    void setNombreLinea(std::string nombre);
     Estacion** getEstaciones();
     int getCantidadEstaciones();
 };

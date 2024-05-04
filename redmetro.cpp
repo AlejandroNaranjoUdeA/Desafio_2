@@ -1,9 +1,9 @@
 #include "redmetro.h"
+#include <iostream>
 
-RedMetro::RedMetro()
-{
+RedMetro::RedMetro() {
     cantidadLineas = 0;
-    lineas = new Linea*[50]; // Capacidad inicial, puedes ajustarla según necesites
+    lineas = new Linea*[50]; // Capacidad inicial,
 }
 
 void RedMetro::agregarLinea(Linea* linea) {
@@ -11,11 +11,11 @@ void RedMetro::agregarLinea(Linea* linea) {
         lineas[cantidadLineas] = linea;
         cantidadLineas++;
     } else {
-        cout << "Error: Capacidad máxima alcanzada." << endl;
+        std::cout << "Error: Capacidad máxima alcanzada." << std::endl;
     }
 }
 
-void RedMetro::eliminarLinea(string nombre) {
+void RedMetro::eliminarLinea(std::string nombre) {
     for (int i = 0; i < cantidadLineas; i++) {
         if (lineas[i]->getNombreLinea() == nombre) {
             delete lineas[i];
@@ -26,7 +26,7 @@ void RedMetro::eliminarLinea(string nombre) {
             return;
         }
     }
-    cout << "Error: Línea no encontrada." << endl;
+    std::cout << "Error: Línea no encontrada." << std::endl;
 }
 
 int RedMetro::obtenerCantidadLineas() {

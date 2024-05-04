@@ -1,23 +1,21 @@
 #include "estaciones.h"
 
-//implementacion del constructro y de los metodos de la clase estaciones:
-Estaciones::Estaciones(string nombre, int siguiente, int anterior, bool transferencia)
-{
+Estacion::Estacion(std::string nombre, int siguiente, int anterior, bool transferencia) {
     nombreEstacion = nombre;
     tiempoSiguiente = siguiente;
     tiempoAnterior = anterior;
     esTransferencia = transferencia;
 }
 
-bool Estacion::esTransferencia() {
+bool Estacion::Transferencia() {
     return esTransferencia;
 }
 
-string Estacion::getNombreEstacion() {
+std::string Estacion::getnombreEstacion() {
     return nombreEstacion;
 }
 
-void Estacion::setNombreEstacion(string nombre) {
+void Estacion::setnombreEstacion(std::string nombre) {
     nombreEstacion = nombre;
 }
 
@@ -44,4 +42,3 @@ bool Estacion::getEsTransferencia() {
 void Estacion::setEsTransferencia(bool transferencia) {
     esTransferencia = transferencia;
 }
-

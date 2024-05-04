@@ -1,7 +1,7 @@
 #include "linea.h"
+#include <iostream>
 
-//Implementacion del constructor y de los metodos de la clase linea
-Linea::Linea(string nombre) {
+Linea::Linea(std::string nombre) {
     nombreLinea = nombre;
     cantidadEstaciones = 0;
     estaciones = new Estacion*[100]; // Capacidad inicial
@@ -12,13 +12,13 @@ void Linea::agregarEstacion(Estacion* estacion) {
         estaciones[cantidadEstaciones] = estacion;
         cantidadEstaciones++;
     } else {
-        cout << "Error: Capacidad máxima alcanzada." << endl;
+        std::cout << "Error: Capacidad máxima alcanzada." << std::endl;
     }
 }
 
-void Linea::eliminarEstacion(string nombre) {
+void Linea::eliminarEstacion(std::string nombre) {
     for (int i = 0; i < cantidadEstaciones; i++) {
-        if (estaciones[i]->getNombreEstacion() == nombre) {
+        if (estaciones[i]->getnombreEstacion() == nombre) {
             delete estaciones[i];
             for (int j = i; j < cantidadEstaciones - 1; j++) {
                 estaciones[j] = estaciones[j + 1];
@@ -27,18 +27,18 @@ void Linea::eliminarEstacion(string nombre) {
             return;
         }
     }
-    cout << "Error: Estación no encontrada." << endl;
+    std::cout << "Error: Estación no encontrada." << std::endl;
 }
 
 int Linea::obtenerCantidadEstaciones() {
     return cantidadEstaciones;
 }
 
-string Linea::getNombreLinea() {
+std::string Linea::getNombreLinea() {
     return nombreLinea;
 }
 
-void Linea::setNombreLinea(string nombre) {
+void Linea::setNombreLinea(std::string nombre) {
     nombreLinea = nombre;
 }
 

@@ -1,16 +1,17 @@
 #ifndef REDMETRO_H
 #define REDMETRO_H
 
+#include "linea.h"
 
-class redMetro
+class RedMetro
 {
 private:
     Linea** lineas;
     int cantidadLineas;
 public:
-    redMetro();
+    RedMetro();
     void agregarLinea(Linea* linea);
-    void eliminarLinea(string nombre);
+    void eliminarLinea(std::string nombre);
     int obtenerCantidadLineas();
     Linea** getLineas();
     int getCantidadLineas();
