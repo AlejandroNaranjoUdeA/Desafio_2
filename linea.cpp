@@ -4,7 +4,7 @@
 Linea::Linea(string nombre) {
     nombreLinea = nombre;
     cantidadEstaciones = 0;
-    estaciones = new Estacion*[100]; // Capacidad inicial, puedes ajustarla según necesites
+    estaciones = new Estacion*[100]; // Capacidad inicial
 }
 
 void Linea::agregarEstacion(Estacion* estacion) {
