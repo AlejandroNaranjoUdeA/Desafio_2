@@ -8,6 +8,7 @@
 class Linea
 {
 private:
+    //atributos:
     std::string nombreLinea;
     Estacion** estaciones;
     int cantidadEstaciones;
