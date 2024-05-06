@@ -2,20 +2,23 @@
 #define LINEA_H
 
 #include "estaciones.h"
+using namespace std;
 
 class Linea
 {
 private:
-    std::string nombreLinea;
+    string nombreLinea;
     Estacion** estaciones;
     int cantidadEstaciones;
 public:
-    Linea(std::string nombre);
+    Linea(string nombre);
+    string obtenerNombre()const;
+
     void agregarEstacion(Estacion* estacion);
-    void eliminarEstacion(std::string nombre);
+    void eliminarEstacion(string nombre);
     int obtenerCantidadEstaciones();
-    std::string getNombreLinea();
-    void setNombreLinea(std::string nombre);
+    string getNombreLinea();
+    void setNombreLinea(string nombre);
     Estacion** getEstaciones();
     int getCantidadEstaciones();
 };

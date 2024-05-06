@@ -2,18 +2,20 @@
 #define ESTACIONES_H
 
 #include <iostream>
+using namespace std;
+
 class Estacion
 {
 private:
-    std::string nombreEstacion;
+    string nombreEstacion;
     int tiempoSiguiente;
     int tiempoAnterior;
     bool esTransferencia;
 public:
-    Estacion(std::string nombre, int siguiente, int anterior, bool transferencia);
+    Estacion(string nombre, int siguiente, int anterior, bool transferencia);
     bool Transferencia();
-    std::string getnombreEstacion();
-    void setnombreEstacion(std::string nombre);
+    string getnombreEstacion();
+    void setnombreEstacion(string nombre);
     int getTiempoSiguiente();
     void setTiempoSiguiente(int tiempo);
     int getTiempoAnterior();

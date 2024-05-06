@@ -1,12 +1,15 @@
 #include "linea.h"
 
-
 #include <iostream>
 
-Linea::Linea(std::string nombre) {
+Linea::Linea(string nombre) {
     nombreLinea = nombre;
     cantidadEstaciones = 0;
     estaciones = new Estacion*[100]; // Capacidad inicial
+}
+
+string Linea::obtenerNombre() const {
+    return nombreLinea;
 }
 
 void Linea::agregarEstacion(Estacion* estacion) {
@@ -14,11 +17,11 @@ void Linea::agregarEstacion(Estacion* estacion) {
         estaciones[cantidadEstaciones] = estacion;
         cantidadEstaciones++;
     } else {
-        std::cout << "Error: Capacidad máxima alcanzada." << std::endl;
+        cout << "Error: Capacidad máxima alcanzada." << endl;
     }
 }
 
-void Linea::eliminarEstacion(std::string nombre) {
+void Linea::eliminarEstacion(string nombre) {
     for (int i = 0; i < cantidadEstaciones; i++) {
         if (estaciones[i]->getnombreEstacion() == nombre) {
             delete estaciones[i];
@@ -29,7 +32,7 @@ void Linea::eliminarEstacion(std::string nombre) {
             return;
         }
     }
-    std::cout << "Error: Estación no encontrada." << std::endl;
+    cout << "Error: Estación no encontrada." << endl;
 }
 
 int Linea::obtenerCantidadEstaciones() {

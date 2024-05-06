@@ -11,7 +11,8 @@ private:
 public:
     RedMetro();
     void agregarLinea(Linea* linea);
-    void eliminarLinea(std::string nombre);
+    void eliminarLineaPorNombre(const std::string& nombreLinea);
+
     int obtenerCantidadLineas();
     Linea** getLineas();
     int getCantidadLineas();
