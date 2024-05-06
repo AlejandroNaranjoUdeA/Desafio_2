@@ -16,10 +16,10 @@ void RedMetro::agregarLinea(Linea* linea) {
 }
 
 void RedMetro::eliminarLineaPorNombre(const std::string& nombreLinea) {
-    //busca el nombre de la linea
+    // Busca el nombre de la línea
     int indiceLineaEliminar = -1;
     for (int i = 0; i < cantidadLineas; ++i) {
-        if (lineas[i]->obtenerNombre()== nombreLinea) {
+        if (lineas[i]->obtenerNombre() == nombreLinea) {
             indiceLineaEliminar = i;
             break;
         }
@@ -30,7 +30,7 @@ void RedMetro::eliminarLineaPorNombre(const std::string& nombreLinea) {
         Estacion** estaciones = lineas[indiceLineaEliminar]->getEstaciones();
         int cantidadEstaciones = lineas[indiceLineaEliminar]->obtenerCantidadEstaciones();
         for (int i = 0; i < cantidadEstaciones; ++i) {
-            if (estaciones[i]->Transferencia()) {
+            if (estaciones[i]->esEstacionTransferencia()) { // Aquí se llama al método correcto
                 tieneTransferencia = true;
                 break;
             }
@@ -47,7 +47,7 @@ void RedMetro::eliminarLineaPorNombre(const std::string& nombreLinea) {
             cout << "No se puede eliminar la linea " << nombreLinea << " porque contiene estaciones de transferencia." << endl;
         }
     } else {
-        cout << "No se encontro la línea " << nombreLinea << endl;
+        cout << "No se encontró la línea " << nombreLinea << endl;
     }
 }
 

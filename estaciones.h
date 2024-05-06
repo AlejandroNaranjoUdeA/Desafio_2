@@ -7,20 +7,25 @@ using namespace std;
 class Estacion
 {
 private:
-    string nombreEstacion;
+    std::string nombreEstacion;
     int tiempoSiguiente;
     int tiempoAnterior;
     bool esTransferencia;
 public:
-    Estacion(string nombre, int siguiente, int anterior, bool transferencia);
+    Estacion(const std::string& nombre, int tiempoSiguiente, int tiempoAnterior, bool transferencia);
+    virtual ~Estacion();
     bool Transferencia();
-    string getnombreEstacion();
-    void setnombreEstacion(string nombre);
+    virtual bool esEstacionTransferencia() const;
+
+
+
+    std::string getnombreEstacion();
+    void setnombreEstacion(std::string nombre);
     int getTiempoSiguiente();
     void setTiempoSiguiente(int tiempo);
     int getTiempoAnterior();
     void setTiempoAnterior(int tiempo);
-    bool getEsTransferencia();
-    void setEsTransferencia(bool transferencia);
 };
+
+
 #endif // ESTACIONES_H

@@ -1,16 +1,18 @@
 #include "estaciones.h"
 
 
-Estacion::Estacion(string nombre, int siguiente, int anterior, bool transferencia) {
-    nombreEstacion = nombre;
-    tiempoSiguiente = siguiente;
-    tiempoAnterior = anterior;
-    esTransferencia = transferencia;
-}
+Estacion::Estacion(const std::string& nombre, int tiempoSiguiente, int tiempoAnterior, bool transferencia)
+    : nombreEstacion(nombre), tiempoSiguiente(tiempoSiguiente), tiempoAnterior(tiempoAnterior), esTransferencia(transferencia) {}
 
-bool Estacion::Transferencia() {
+Estacion::~Estacion() {}
+
+bool Estacion::esEstacionTransferencia() const {
     return esTransferencia;
 }
+
+
+
+
 
 std::string Estacion::getnombreEstacion() {
     return nombreEstacion;
@@ -36,10 +38,4 @@ void Estacion::setTiempoAnterior(int tiempo) {
     tiempoAnterior = tiempo;
 }
 
-bool Estacion::getEsTransferencia() {
-    return esTransferencia;
-}
 
-void Estacion::setEsTransferencia(bool transferencia) {
-    esTransferencia = transferencia;
-}
