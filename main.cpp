@@ -5,10 +5,8 @@
 #include "estacionnormal.h"
 #include "estaciontransferencia.h"
 
-
-
 int main() {
-    EstacionNormal estacionNormal("Estacion Normal", 10, 20);
+    EstacionNormal estacionNormal("Estacion Normalll", 10, 20);
     EstacionTransferencia estacionTransferencia("Estacion de Transferencia", 15, 25);
 
     // Polimorfismo
@@ -25,6 +23,8 @@ int main() {
     linea1->agregarEstacion(ptrEstacion1);
     linea1->agregarEstacion(ptrEstacion2);
 
+
+
     // Crear una red de metro y agregar la linea a la red
     RedMetro* redMetro = new RedMetro();
     redMetro->agregarLinea(linea1);
@@ -35,12 +35,36 @@ int main() {
     cout << "Cantidad de lineas en la red de metro: " << redMetro->obtenerCantidadLineas() << endl;
     redMetro->eliminarLineaPorNombre("Linea1");
     cout << "Cantidad de lineas en la red de metro: " << redMetro->obtenerCantidadLineas() << endl;
+    cout<<endl;
+
+
 
     // Mostrar el nombre de la primera estación de la primera línea
     if (redMetro->getCantidadLineas() > 0 && redMetro->getLineas()[0]->obtenerCantidadEstaciones() > 0) {
         cout << "Nombre de la primera estacion de la primera linea: " << redMetro->getLineas()[0]->getEstaciones()[0]->getnombreEstacion() << endl;
     }
     cout<<"hola al mundo"<<endl;
+
+    if (redMetro->getCantidadLineas() > 0) {
+        Linea* primeraLinea = redMetro->getLineas()[0]; // Obtener la primera línea de la red de metro aqui es donde hay que tantear
+        int cantidadEstaciones = primeraLinea->obtenerCantidadEstaciones();
+        cout << "las cantidad de estaciones de la linea seleccionada es "<< cantidadEstaciones << " estaciones." << endl;
+    } else {
+        cout << "No hay líneas en la red de metro." << endl;
+    }
+
+    linea1->mostrarEstacionesDisponibles();
+    // Suponiendo que tienes una instancia de Linea llamada "linea1" creada previamente
+    linea1->eliminarEstacion("Estacion de Transferencia");
+    linea1->mostrarEstacionesDisponibles();
+
+
+
+
+
+
+
+
 
     // Liberar la memoria al finalizar
     delete redMetro;

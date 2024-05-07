@@ -10,10 +10,6 @@ bool Estacion::esEstacionTransferencia() const {
     return esTransferencia;
 }
 
-
-
-
-
 std::string Estacion::getnombreEstacion() {
     return nombreEstacion;
 }

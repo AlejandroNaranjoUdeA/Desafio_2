@@ -2,8 +2,6 @@
 #define ESTACIONTRANSFERENCIA_H
 
 
-#define ESTACIONTRANSFERENCIA_H
-
 #include "estaciones.h"
 
 class EstacionTransferencia : public Estacion {

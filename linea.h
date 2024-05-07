@@ -15,7 +15,9 @@ public:
     string obtenerNombre()const;
 
     void agregarEstacion(Estacion* estacion);
-    void eliminarEstacion(string nombre);
+    void eliminarEstacion(const std::string& nombreEstacion);
+    bool esEstacionTransferencia(const std::string& nombreEstacion);
+    void mostrarEstacionesDisponibles();
     int obtenerCantidadEstaciones();
     string getNombreLinea();
     void setNombreLinea(string nombre);
