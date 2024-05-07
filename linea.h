@@ -2,20 +2,23 @@
 #define LINEA_H
 
 #include <QObject>
-
 #include "estaciones.h"
 
 class Linea
 {
 private:
-    //atributos:
     std::string nombreLinea;
     Estacion** estaciones;
     int cantidadEstaciones;
 public:
     Linea(std::string nombre);
+    ~Linea();
+    std::string obtenerNombre()const;
+
     void agregarEstacion(Estacion* estacion);
-    void eliminarEstacion(std::string nombre);
+    void eliminarEstacion(const std::string& nombreEstacion);
+    bool esEstacionTransferencia(const std::string& nombreEstacion);
+    void mostrarEstacionesDisponibles();
     int obtenerCantidadEstaciones();
     std::string getNombreLinea();
     void setNombreLinea(std::string nombre);

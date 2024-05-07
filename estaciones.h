@@ -2,8 +2,10 @@
 #define ESTACIONES_H
 
 #include <QObject>
-
+#include<iostream>
 #include <string>
+
+using namespace std;
 
 class Estacion
 {
@@ -13,16 +15,20 @@ private:
     int tiempoAnterior;
     bool esTransferencia;
 public:
-    Estacion(std::string nombre, int siguiente, int anterior, bool transferencia);
+    Estacion(const std::string& nombre, int tiempoSiguiente, int tiempoAnterior, bool transferencia);
+    virtual ~Estacion();
     bool Transferencia();
+    virtual bool esEstacionTransferencia() const;
+
+
+
     std::string getnombreEstacion();
     void setnombreEstacion(std::string nombre);
     int getTiempoSiguiente();
     void setTiempoSiguiente(int tiempo);
     int getTiempoAnterior();
     void setTiempoAnterior(int tiempo);
-    bool getEsTransferencia();
-    void setEsTransferencia(bool transferencia);
 };
+
 
 #endif // ESTACIONES_H

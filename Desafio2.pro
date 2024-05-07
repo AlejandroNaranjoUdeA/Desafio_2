@@ -8,6 +8,8 @@ CONFIG += c++17 cmdline
 
 SOURCES += \
         estaciones.cpp \
+        estacionnormal.cpp \
+        estaciontransferencia.cpp \
         linea.cpp \
         main.cpp \
         redmetro.cpp
@@ -19,5 +21,7 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 
 HEADERS += \
     estaciones.h \
+    estacionnormal.h \
+    estaciontransferencia.h \
     linea.h \
     redmetro.h
