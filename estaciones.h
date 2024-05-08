@@ -2,6 +2,7 @@
 #define ESTACIONES_H
 
 #include <iostream>
+#include <ctime>
 using namespace std;
 
 class Estacion
@@ -16,16 +17,14 @@ public:
     virtual ~Estacion();
     bool Transferencia();
     virtual bool esEstacionTransferencia() const;
-
-
-
     std::string getnombreEstacion();
     void setnombreEstacion(std::string nombre);
+
+
     int getTiempoSiguiente();
     void setTiempoSiguiente(int tiempo);
     int getTiempoAnterior();
     void setTiempoAnterior(int tiempo);
+    std::tm calcularTiempoLlegada(const std::tm& tiempoSalida, int tiempoViaje) const;
 };
-
-
 #endif // ESTACIONES_H
