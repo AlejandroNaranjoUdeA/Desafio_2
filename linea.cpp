@@ -20,6 +20,45 @@ string Linea::obtenerNombre() const {
     return nombreLinea;
 }
 
+//caso 1
+void Linea::agregarEstacionAlPrincipio(Estacion* estacion) {
+    if (cantidadEstaciones < 100) {
+        for (int i = cantidadEstaciones; i > 0; --i) {
+            estaciones[i] = estaciones[i - 1];
+        }
+        estaciones[0] = estacion;
+        cantidadEstaciones++;
+    } else {
+        cout << "Error: Capacidad máxima alcanzada." << endl;
+    }
+}
+
+void Linea::agregarEstacionEnPosicion(Estacion* estacion, int posicion) {
+    if (cantidadEstaciones < 100 && posicion >= 0 && posicion <= cantidadEstaciones) {
+        for (int i = cantidadEstaciones; i > posicion; --i) {
+            estaciones[i] = estaciones[i - 1];
+        }
+        estaciones[posicion] = estacion;
+        cantidadEstaciones++;
+    } else {
+        cout << "Error: Posición inválida o capacidad máxima alcanzada." << endl;
+    }
+}
+
+
+
+
+bool Linea::perteneceEstacion(const std::string& nombreEstacion) {
+    for (int i = 0; i < cantidadEstaciones; ++i) {
+        if (estaciones[i]->getnombreEstacion() == nombreEstacion) {
+            return true;
+        }
+    }
+    return false;
+}
+
+
+
 void Linea::agregarEstacion(Estacion* estacion) {
     if (cantidadEstaciones < 100) {
         estaciones[cantidadEstaciones] = estacion;

@@ -11,7 +11,8 @@ private:
     Linea** lineas;
     int cantidadLineas;
 public:
-    RedMetro();
+    RedMetro(); //constructor
+    ~RedMetro(); //destructor
     void agregarLinea(Linea* linea);
     void eliminarLineaPorNombre(const std::string& nombreLinea);
 

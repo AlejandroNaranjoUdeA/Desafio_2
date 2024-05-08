@@ -6,6 +6,13 @@ RedMetro::RedMetro() {
     lineas = new Linea*[50]; // Capacidad inicial,
 }
 
+RedMetro::~RedMetro() {
+    for (int i = 0; i < cantidadLineas; ++i) {
+        delete lineas[i];
+    }
+    delete[] lineas;
+}
+
 void RedMetro::agregarLinea(Linea* linea) {
     if (cantidadLineas < 50) {
         lineas[cantidadLineas] = linea;
