@@ -1,7 +1,7 @@
+
 #ifndef ESTACIONTRANSFERENCIA_H
 #define ESTACIONTRANSFERENCIA_H
 
-#include <QObject>
 
 #include "estaciones.h"
 

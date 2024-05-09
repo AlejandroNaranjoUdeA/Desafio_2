@@ -1,3 +1,4 @@
+
 #include "estacionnormal.h"
 
 EstacionNormal::EstacionNormal(const string& nombre, int tiempoSiguiente, int tiempoAnterior)

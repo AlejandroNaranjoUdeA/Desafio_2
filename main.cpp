@@ -1,4 +1,4 @@
-#include "estaciones.h"
+1#include "estaciones.h"
 #include "linea.h"
 #include "redmetro.h"
 #include <iostream>
@@ -6,15 +6,11 @@
 #include "estaciontransferencia.h"
 
 int main() {
-
     RedMetro* redMetro = new RedMetro(); // Crear una instancia de RedMetro
-
     unsigned int opcion = 0;
     std::string nombreLinea;
     std::string nombreEstacion;
     //Se le muestra al usuario un mensaje y un menu:
-
-
     std::cout<<"!!!BIENVENIDO A SU RED METRO!!!\n";
     std::cout<<"Nota: Como es la primera vez, tu unica opcion es agregar una linea a la red metro\n\n";
 
@@ -31,9 +27,9 @@ int main() {
 
     Linea* nuevaLinea = nullptr; // Declarar la variable fuera del switch
     int cantidadEstacionesRed = 0; // Declarar e inicializar la variable fuera del switch
+    Estacion* nuevaEstacion;
 
-
-    while(opcion<9){
+    while(opcion<10){
 
         switch(opcion){
         case 1:
@@ -51,21 +47,19 @@ int main() {
             std::cout << "Tiempo anterior: "; std::cin >> tiempoAnterior;
             std::cout << "Es estacion de transferencia (1 para Si, 0 para No): "; std::cin >> esTransferencia;
 
-            Estacion* nuevaEstacion;
             if (esTransferencia) {
                 nuevaEstacion = new EstacionTransferencia(nombreEstacion, tiempoSiguiente, tiempoAnterior);
             } else {
                 nuevaEstacion = new EstacionNormal(nombreEstacion, tiempoSiguiente, tiempoAnterior);
             }
-
             // Mostrar todas las líneas disponibles para que el usuario elija a qué línea agregar la estación
             std::cout << "Lineas disponibles:\n";
             for (int i = 0; i < redMetro->getCantidadLineas(); ++i) {
                 std::cout << i+1 << ". " << redMetro->getLineas()[i]->obtenerNombre() << std::endl;
             }
+
             int opcionLinea;
             std::cout << "Elige la linea a la que deseas agregar la estacion: "; std::cin >> opcionLinea;
-
             if (opcionLinea >= 1 && opcionLinea <= redMetro->getCantidadLineas()) {
                 Linea* lineaSeleccionada = redMetro->getLineas()[opcionLinea - 1];
                 switch (opcionAgregarEstacion) {
@@ -88,16 +82,66 @@ int main() {
                 std::cout << "Opcion de linea no valida." << std::endl;
             }
             break;
-/*
-        case 2:
-            //mostrar lineas:
+
+        case 2:{
+            Linea** lineas = redMetro->getLineas();
+            redMetro->mostrarLineasDisponibles();
+
+            cout << "Ingrese el nombre de la linea que desea ver sus estaciones para eliminar una: ";
+            std::string nombreLinea;
+            cin >> nombreLinea;
+            // Buscar la línea con el nombre proporcionado
+            Linea* lineaSeleccionada = nullptr;
+            for (int i = 0; i < redMetro->obtenerCantidadLineas(); ++i) {
+                if (lineas[i]->obtenerNombre() == nombreLinea) {
+                    lineaSeleccionada = lineas[i];
+                    break;
+                }
+            }
+            if (lineaSeleccionada != nullptr) {
+                // Mostrar las estaciones de la línea seleccionada
+                lineaSeleccionada->mostrarEstacionesDisponibles(nombreLinea);
+                string estaciondes;
+                cout<<"ingrese el nombre de la estacion a borar de la linea"<<endl;
+                cin>>estaciondes;
+                lineaSeleccionada->eliminarEstacion(estaciondes);
+            } else {
+                cout << "La línea ingresada no existe." << endl;
+            };
             break;
+        }
+
         case 3:
-            break;
-        case 4:
+            cout << "Cantidad de lineas en la red de metro: " << redMetro->obtenerCantidadLineas() << endl;
             break;
 
-*/
+        case 4:{
+            Linea** lineas = redMetro->getLineas();
+            redMetro->mostrarLineasDisponibles();
+
+            cout << "Ingrese el nombre de la linea que desea ver sus estaciones: ";
+            std::string nombreLinea;
+            cin >> nombreLinea;
+
+            // Buscar la línea con el nombre proporcionado
+            Linea* lineaSeleccionada = nullptr;
+            for (int i = 0; i < redMetro->obtenerCantidadLineas(); ++i) {
+                if (lineas[i]->obtenerNombre() == nombreLinea) {
+                    lineaSeleccionada = lineas[i];
+                    break;
+                }
+            }
+
+            if (lineaSeleccionada != nullptr) {
+                // Mostrar las estaciones de la línea seleccionada
+                lineaSeleccionada->mostrarEstacionesDisponibles(nombreLinea);
+            } else {
+                cout << "La línea ingresada no existe." << endl;
+            }
+            break;
+        }
+
+
         case 5:
             std::cout << "Ingrese el nombre de la estacion: "; std::cin >> nombreEstacion;
             std::cout << "Ingrese el nombre de la linea: "; std::cin >> nombreLinea;
@@ -127,12 +171,18 @@ int main() {
             redMetro->agregarLinea(nuevaLinea);
             std::cout << "Linea agregada correctamente.\n";
             break;
-/*
-        case 7:
-            break;
-*/
-        case 8:
 
+        case 7:{
+            cout << "Cantidad de lineas en la red de metro: " << redMetro->obtenerCantidadLineas() << endl;
+            redMetro->mostrarLineasDisponibles();
+            string nume;
+            cout<<"escribe el nombre de la linea que quierres borrar"<<endl;
+            cin>>nume;
+            redMetro->eliminarLineaPorNombre(nume);
+            break;
+
+        }
+        case 8:
             // Obtener la cantidad total de estaciones en la red Metro
             for (int i = 0; i < redMetro->getCantidadLineas(); i++) {
                 Linea* linea = redMetro->getLineas()[i];
@@ -147,14 +197,53 @@ int main() {
             std::cout << "La red de metro tiene en total " << cantidadEstacionesRed << " estaciones.\n";
 
             break;
-/*
-        case 9:
+
+        case 9:{
+            // Obtener las estaciones relevantes de la línea
+            string lineacal,estacione, estacionf;
+
+            cout<<"ingrese la linea de las estaciones para calcular el tiempo de llegada"<<endl;
+            cin>>lineacal;
+            cout<<"ingrese la estacion de partida "<<endl;
+            cin>>estacione;
+            cout<<"ingrese la estacion de destino"<<endl;
+            cin>>estacionf;
+            Estacion** estaciones = redMetro->getEstacionesDeLinea(lineacal);
+            // Encontrar las posiciones de las estaciones que se quieren comparar en la línea
+            int posicionEstacionA = redMetro->getPosicionEstacionEnLinea(estacione, lineacal);
+            int posicionEstacionB = redMetro->getPosicionEstacionEnLinea(estacionf, lineacal);
+
+            // Obtener la hora actual como tiempo de salida
+            std::time_t tiempoActual = std::time(nullptr);
+            std::tm tiempoSalida = *std::localtime(&tiempoActual);
+
+            // Inicializar el tiempo total de viaje con los tiempos de viaje entre las estaciones
+            int tiempoTotalViaje = 0;
+
+            // Sumar los tiempos de espera entre las estaciones relevantes
+            for (int i = posicionEstacionA; i < posicionEstacionB; ++i) {
+                tiempoTotalViaje += estaciones[i]->getTiempoSiguiente();
+            }
+
+            // Calcular el tiempo de llegada a la estación C desde la estación A
+            std::tm tiempoLlegada = estaciones[posicionEstacionA]->calcularTiempoLlegada(tiempoSalida, tiempoTotalViaje);
+
+            // Imprimir el tiempo de salida y llegada
+            std::cout << "Hora de salida: " << tiempoSalida.tm_hour << ":" << tiempoSalida.tm_min << ":" << tiempoSalida.tm_sec << std::endl;
+            std::cout << "Hora de llegada estimada: " << tiempoLlegada.tm_hour << ":" << tiempoLlegada.tm_min << ":" << tiempoLlegada.tm_sec << std::endl;
             break;
-*/
+
+        }
         default:
             std::cout<<"\nOpcion no valida!!\n";
             break;
 
+        }
+
+        // Liberar memoria de nuevaEstacion si fue creada dinámicamente
+        if (nuevaEstacion != nullptr) {
+            delete nuevaEstacion;
+            nuevaEstacion = nullptr; // Establecer a nullptr después de eliminarla
         }
 
 
@@ -166,77 +255,18 @@ int main() {
         std::cout<<"6. Agregar una linea a la red Metro.\n";
         std::cout<<"7. Eliminar una linea de la red Metro. \n";
         std::cout<<"8. Saber cuantas estaciones tiene una red Metro.\n";
-        std::cout<<"9. Salir.\n";
+        std::cout<<"9. saber el tiempo que tomara llegar de una estacion a otra dependiendo la linea"<<std::endl;
+        std::cout<<"10. Salir.\n";
         std::cout<<"Eliga una opcion: "; std::cin>>opcion;
-
     }
-
-/*
-    EstacionNormal estacionNormal("Estacion Normalll", 10, 20);
-    EstacionTransferencia estacionTransferencia("Estacion de Transferencia", 15, 25);
-
-    // Polimorfismo
-    Estacion* ptrEstacion1 = &estacionNormal;
-    Estacion* ptrEstacion2 = &estacionTransferencia;
-
-    std::cout << ptrEstacion1-> getnombreEstacion() << " es estacion de transferencia: " << ptrEstacion1->esEstacionTransferencia() << std::endl;
-    std::cout << ptrEstacion2-> getnombreEstacion() << " es estacion de transferencia: " << ptrEstacion2->esEstacionTransferencia() << std::endl;
-
-
-    // Crear una linea y agregar estaciones a la línea
-    Linea* linea1 = new Linea("Linea1");
-    Linea* linea5 = new Linea("Linea5");
-    linea1->agregarEstacion(ptrEstacion1);
-    linea1->agregarEstacion(ptrEstacion2);
-
-
-
-    // Crear una red de metro y agregar la linea a la red
-    RedMetro* redMetro = new RedMetro();
-    redMetro->agregarLinea(linea1);
-    redMetro->agregarLinea(linea5);
-
-
-    // Mostrar la cantidad de lineas en la red
-    cout << "Cantidad de lineas en la red de metro: " << redMetro->obtenerCantidadLineas() << endl;
-    redMetro->eliminarLineaPorNombre("Linea1");
-    cout << "Cantidad de lineas en la red de metro: " << redMetro->obtenerCantidadLineas() << endl;
-    cout<<endl;
-
-
-
-    // Mostrar el nombre de la primera estación de la primera línea
-    if (redMetro->getCantidadLineas() > 0 && redMetro->getLineas()[0]->obtenerCantidadEstaciones() > 0) {
-        cout << "Nombre de la primera estacion de la primera linea: " << redMetro->getLineas()[0]->getEstaciones()[0]->getnombreEstacion() << endl;
-    }
-    cout<<"hola al mundo"<<endl;
-
-    if (redMetro->getCantidadLineas() > 0) {
-        Linea* primeraLinea = redMetro->getLineas()[0]; // Obtener la primera línea de la red de metro aqui es donde hay que tantear
-        int cantidadEstaciones = primeraLinea->obtenerCantidadEstaciones();
-        cout << "las cantidad de estaciones de la linea seleccionada es "<< cantidadEstaciones << " estaciones." << endl;
-    } else {
-        cout << "No hay líneas en la red de metro." << endl;
-    }
-
-    linea1->mostrarEstacionesDisponibles();
-    // Suponiendo que tienes una instancia de Linea llamada "linea1" creada previamente
-    linea1->eliminarEstacion("Estacion de Transferencia");
-    linea1->mostrarEstacionesDisponibles();
-
-
-
-
-
-
-*/
 
 
     // Liberar la memoria al finalizar
 
     delete redMetro;
-
+    delete nuevaLinea;
 
 
     return 0;
 }
+

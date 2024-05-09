@@ -1,5 +1,5 @@
-#include "estaciones.h"
 
+#include "estaciones.h"
 
 Estacion::Estacion(const std::string& nombre, int tiempoSiguiente, int tiempoAnterior, bool transferencia)
     : nombreEstacion(nombre), tiempoSiguiente(tiempoSiguiente), tiempoAnterior(tiempoAnterior), esTransferencia(transferencia) {}
@@ -9,8 +9,6 @@ Estacion::~Estacion() {}
 bool Estacion::esEstacionTransferencia() const {
     return esTransferencia;
 }
-
-
 
 std::string Estacion::getnombreEstacion() {
     return nombreEstacion;
@@ -34,4 +32,12 @@ int Estacion::getTiempoAnterior() {
 
 void Estacion::setTiempoAnterior(int tiempo) {
     tiempoAnterior = tiempo;
+}
+
+std::tm Estacion::calcularTiempoLlegada(const std::tm& tiempoSalida, int tiempoViaje) const {
+    std::tm tiempoLlegada = tiempoSalida;
+    tiempoLlegada.tm_sec += tiempoViaje;
+    std::mktime(&tiempoLlegada); // Ajustar la estructura de tiempo
+
+    return tiempoLlegada;
 }

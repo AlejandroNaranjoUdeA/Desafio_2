@@ -1,8 +1,7 @@
+
+// Archivo estacionnormal.h
 #ifndef ESTACIONNORMAL_H
 #define ESTACIONNORMAL_H
-
-#include <QObject>
-
 #include "estaciones.h"
 
 class EstacionNormal : public Estacion {

@@ -1,20 +1,20 @@
+
 #ifndef LINEA_H
 #define LINEA_H
 
-#include <QObject>
 #include "estaciones.h"
+using namespace std;
 
 class Linea
 {
 private:
-    std::string nombreLinea;
+    string nombreLinea;
     Estacion** estaciones;
     int cantidadEstaciones;
 public:
-    Linea(std::string nombre);
+    Linea(string nombre);
     ~Linea();
-    std::string obtenerNombre()const;
-
+    string obtenerNombre()const;
     // Opción para agregar una estación al principio de la línea
     void agregarEstacionAlPrincipio(Estacion* estacion);
 
@@ -26,10 +26,10 @@ public:
     void agregarEstacion(Estacion* estacion);
     void eliminarEstacion(const std::string& nombreEstacion);
     bool esEstacionTransferencia(const std::string& nombreEstacion);
-    void mostrarEstacionesDisponibles();
+    void mostrarEstacionesDisponibles(const std::string& nombreLinea);
     int obtenerCantidadEstaciones();
-    std::string getNombreLinea();
-    void setNombreLinea(std::string nombre);
+    string getNombreLinea();
+    void setNombreLinea(string nombre);
     Estacion** getEstaciones();
     int getCantidadEstaciones();
 };

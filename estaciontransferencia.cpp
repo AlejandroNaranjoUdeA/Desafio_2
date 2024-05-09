@@ -1,3 +1,4 @@
+
 #include "estaciontransferencia.h"
 
 EstacionTransferencia::EstacionTransferencia(const string& nombre, int tiempoSiguiente, int tiempoAnterior)
