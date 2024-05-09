@@ -58,39 +58,34 @@ int main() {
                 nuevaEstacion = new EstacionNormal(nombreEstacion, tiempoSiguiente, tiempoAnterior);
             }
 
-            switch (opcionAgregarEstacion) {
-            case 1:
-                // Agregar estacion al inicio de la linea
-                if (redMetro->getCantidadLineas() > 0) {
-                    Linea* primeraLinea = redMetro->getLineas()[0]; // Supongo que se agrega a la primera linea, puedes adaptarlo según tu lógica
-                    primeraLinea->agregarEstacionAlPrincipio(nuevaEstacion);
-                } else {
-                    std::cout << "No hay lineas en la red de metro para agregar la estacion." << std::endl;
+            // Mostrar todas las líneas disponibles para que el usuario elija a qué línea agregar la estación
+            std::cout << "Lineas disponibles:\n";
+            for (int i = 0; i < redMetro->getCantidadLineas(); ++i) {
+                std::cout << i+1 << ". " << redMetro->getLineas()[i]->obtenerNombre() << std::endl;
+            }
+            int opcionLinea;
+            std::cout << "Elige la linea a la que deseas agregar la estacion: "; std::cin >> opcionLinea;
+
+            if (opcionLinea >= 1 && opcionLinea <= redMetro->getCantidadLineas()) {
+                Linea* lineaSeleccionada = redMetro->getLineas()[opcionLinea - 1];
+                switch (opcionAgregarEstacion) {
+                case 1:
+                    lineaSeleccionada->agregarEstacionAlPrincipio(nuevaEstacion);
+                    break;
+                case 2:
+                    lineaSeleccionada->agregarEstacion(nuevaEstacion);
+                    break;
+                case 3:
+                    int posicion;
+                    std::cout << "Posicion intermedia para agregar la estacion: "; std::cin >> posicion;
+                    lineaSeleccionada->agregarEstacionEnPosicion(nuevaEstacion, posicion);
+                    break;
+                default:
+                    std::cout << "Opcion no valida." << std::endl;
+                    break;
                 }
-                break;
-            case 2:
-                // Agregar estacion al final de la linea
-                if (redMetro->getCantidadLineas() > 0) {
-                    Linea* primeraLinea = redMetro->getLineas()[0]; // Supongo que se agrega a la primera linea, puedes adaptarlo según tu lógica
-                    primeraLinea->agregarEstacion(nuevaEstacion);
-                } else {
-                    std::cout << "No hay lineas en la red de metro para agregar la estacion." << std::endl;
-                }
-                break;
-            case 3:
-                // Agregar estacion en posicion intermedia
-                int posicion;
-                std::cout << "Posicion intermedia para agregar la estacion: "; std::cin >> posicion;
-                if (redMetro->getCantidadLineas() > 0) {
-                    Linea* primeraLinea = redMetro->getLineas()[0]; // Supongo que se agrega a la primera linea, puedes adaptarlo según tu lógica
-                    primeraLinea->agregarEstacionEnPosicion(nuevaEstacion, posicion);
-                } else {
-                    std::cout << "No hay lineas en la red de metro para agregar la estacion." << std::endl;
-                }
-                break;
-            default:
-                std::cout << "Opcion no valida." << std::endl;
-                break;
+            } else {
+                std::cout << "Opcion de linea no valida." << std::endl;
             }
             break;
 /*
@@ -139,10 +134,18 @@ int main() {
         case 8:
 
             // Obtener la cantidad total de estaciones en la red Metro
-            for (int i = 0; i < redMetro->getCantidadLineas(); ++i) {
-                cantidadEstacionesRed += redMetro->getLineas()[i]->obtenerCantidadEstaciones();
+            for (int i = 0; i < redMetro->getCantidadLineas(); i++) {
+                Linea* linea = redMetro->getLineas()[i];
+                cantidadEstacionesRed += linea->obtenerCantidadEstaciones();
+                // Restar una estación por cada estación de transferencia para evitar contarlas dos veces
+                for (int j = 0; j < linea->obtenerCantidadEstaciones(); ++j) {
+                    if (linea->getEstaciones()[j]->esEstacionTransferencia()) {
+                        cantidadEstacionesRed--;
+                    }
+                }
             }
             std::cout << "La red de metro tiene en total " << cantidadEstacionesRed << " estaciones.\n";
+
             break;
 /*
         case 9:
