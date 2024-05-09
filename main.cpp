@@ -253,6 +253,10 @@ int main() {
         std::cout<<"10. Salir.\n";
         std::cout<<"Eliga una opcion: "; std::cin>>opcion;
     }
+    delete redMetro;
+    delete nuevaLinea;
+    //delete nuevaEstacion;
+
 }
 
 
