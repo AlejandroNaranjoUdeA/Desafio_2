@@ -1,5 +1,4 @@
 #include "linea.h"
-
 #include <iostream>
 
 Linea::Linea(string nombre) {
@@ -7,19 +6,64 @@ Linea::Linea(string nombre) {
     cantidadEstaciones = 0;
     estaciones = new Estacion*[100]; // Capacidad inicial
 }
-
+//destructor::
+Linea::~Linea() {
+    for (int i = 0; i < cantidadEstaciones; ++i) {
+        delete estaciones[i];
+    }
+    delete[] estaciones;
+}
 string Linea::obtenerNombre() const {
     return nombreLinea;
 }
+//caso 1
+void Linea::agregarEstacionAlPrincipio(Estacion* estacion) {
+    if (cantidadEstaciones < 100) {
+        for (int i = cantidadEstaciones; i > 0; --i) {
+            estaciones[i] = estaciones[i - 1];
+        }
+        estaciones[0] = estacion;
+        cantidadEstaciones++;
+    } else {
+        cout << "Error: Capacidad máxima alcanzada." << endl;
+    }
+}
+
+void Linea::agregarEstacionEnPosicion(Estacion* estacion, int posicion) {
+    if (cantidadEstaciones < 100 && posicion >= 0 && posicion <= cantidadEstaciones) {
+        for (int i = cantidadEstaciones; i > posicion; --i) {
+            estaciones[i] = estaciones[i - 1];
+        }
+        estaciones[posicion] = estacion;
+        cantidadEstaciones++;
+    } else {
+        cout << "Error: Posición inválida o capacidad máxima alcanzada." << endl;
+    }
+}
+
+
+
+
+bool Linea::perteneceEstacion(const std::string& nombreEstacion) {
+    for (int i = 0; i < cantidadEstaciones; ++i) {
+        if (estaciones[i]->getnombreEstacion() == nombreEstacion) {
+            return true;
+        }
+    }
+    return false;
+}
+
+
 
 void Linea::agregarEstacion(Estacion* estacion) {
-    if (cantidadEstaciones < 100) {
+    if (cantidadEstaciones < 100) {       
         estaciones[cantidadEstaciones] = estacion;
         cantidadEstaciones++;
     } else {
         cout << "Error: Capacidad máxima alcanzada." << endl;
     }
 }
+
 bool Linea::esEstacionTransferencia(const std::string& nombreEstacion) {
     for (int i = 0; i < cantidadEstaciones; ++i) {
         if (estaciones[i]->getnombreEstacion() == nombreEstacion) {
@@ -49,12 +93,14 @@ void Linea::eliminarEstacion(const std::string& nombreEstacion) {
     }
     cout << "La estacion " << nombreEstacion << " no se encontro en la linea." << endl;
 }
-void Linea::mostrarEstacionesDisponibles() {
-    cout << "Estaciones disponibles en la linea:" << endl;
+
+void Linea::mostrarEstacionesDisponibles(const std::string& nombreLinea) {
+    std::cout << "Estaciones disponibles en la linea " << nombreLinea << ":" << std::endl;
     for (int i = 0; i < cantidadEstaciones; ++i) {
-        cout << "- " << estaciones[i]->getnombreEstacion() << endl;
+        std::cout << "- " << estaciones[i]->getnombreEstacion() << std::endl;
     }
 }
+
 
 int Linea::obtenerCantidadEstaciones() {
     return cantidadEstaciones;
